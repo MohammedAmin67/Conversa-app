@@ -16,7 +16,7 @@ const HomePage = () => {
   useEffect(() => {
     const handleResize = () => {
       const mobile = window.innerWidth < 1024;
-      setIsMobile(mobile);
+      setIsMobile(mobile);  
       
       // Close sidebar on desktop
       if (!mobile) {
@@ -166,6 +166,8 @@ const HomePage = () => {
           </svg>
         </button>
       )}
+
+      
     </div>
   );
 };
