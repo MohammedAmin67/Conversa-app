@@ -1,0 +1,38 @@
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Modern Gradient -->
+    <linearGradient id="modernGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667EEA"/>
+      <stop offset="100%" style="stop-color:#764BA2"/>
+    </linearGradient>
+    
+    <!-- Accent Gradient -->
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F093FB"/>
+      <stop offset="100%" style="stop-color:#F5576C"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="100" height="100" rx="20" fill="url(#modernGradient)"/>
+  
+  <!-- Letter 'C' -->
+  <path d="M30 50 Q30 25 50 25 Q70 25 70 35" 
+        stroke="#FFFFFF" 
+        stroke-width="8" 
+        stroke-linecap="round" 
+        fill="none" 
+        opacity="0.9"/>
+  
+  <path d="M70 65 Q70 75 50 75 Q30 75 30 50" 
+        stroke="#FFFFFF" 
+        stroke-width="8" 
+        stroke-linecap="round" 
+        fill="none" 
+        opacity="0.9"/>
+  
+  <!-- Chat Dots -->
+  <circle cx="45" cy="50" r="3" fill="url(#accentGradient)"/>
+  <circle cx="55" cy="50" r="3" fill="url(#accentGradient)"/>
+  <circle cx="65" cy="50" r="3" fill="url(#accentGradient)"/>
+</svg>

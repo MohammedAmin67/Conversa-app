@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Your existing styles... */
+
+/* Compact Mode Styles */
+.compact-mode {
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 0.75rem;
+  --spacing-lg: 1rem;
+  --spacing-xl: 1.25rem;
+}
+
+.compact-mode .p-4 {
+  padding: var(--spacing-md) !important;
+}
+
+.compact-mode .p-6 {
+  padding: var(--spacing-lg) !important;
+}
+
+.compact-mode .gap-4 {
+  gap: var(--spacing-md) !important;
+}
+
+.compact-mode .space-y-6 > * + * {
+  margin-top: var(--spacing-lg) !important;
+}
+
+.compact-mode .space-y-8 > * + * {
+  margin-top: var(--spacing-xl) !important;
+}
+
+.compact-mode .mb-8 {
+  margin-bottom: var(--spacing-xl) !important;
+}
+
+.compact-mode .mb-6 {
+  margin-bottom: var(--spacing-lg) !important;
+}
+
+.compact-mode .mb-4 {
+  margin-bottom: var(--spacing-md) !important;
+}
+
+/* Dark Mode Styles */
+.dark {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+}
+
+.dark body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* RTL Language Support */
+[dir="rtl"] {
+  text-align: right;
+}
+
+[dir="rtl"] .flex {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .ml-2 {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
+[dir="rtl"] .mr-2 {
+  margin-right: 0;
+  margin-left: 0.5rem;
+}
+
+[dir="rtl"] .ml-3 {
+  margin-left: 0;
+  margin-right: 0.75rem;
+}
+
+[dir="rtl"] .mr-3 {
+  margin-right: 0;
+  margin-left: 0.75rem;
+}
+
+[dir="rtl"] .pl-4 {
+  padding-left: 0;
+  padding-right: 1rem;
+}
+
+[dir="rtl"] .pr-4 {
+  padding-right: 0;
+  padding-left: 1rem;
+}
+
+/* Smooth transitions for all settings changes */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Custom scrollbar for settings */
+.settings-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.settings-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.settings-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.settings-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
