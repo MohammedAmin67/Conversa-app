@@ -49,9 +49,9 @@ const HomePage = () => {
   return (
     <div className="h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 relative overflow-hidden">
       {/* Background Effects */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-48 h-48 md:w-96 md:h-96 bg-blue-500/8 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-0 right-1/4 w-48 h-48 md:w-96 md:h-96 bg-purple-500/6 rounded-full blur-3xl animate-pulse delay-1000"></div>
+      <div className="absolute inset-0 overflow-hidden pointer-events-none bg-decor">
+        <div className="absolute top-0 left-1/4 w-48 h-48 md:w-96 md:h-96 bg-blue-500/8 rounded-full blur-3xl animate-pulse decor-hide"></div>
+        <div className="absolute bottom-0 right-1/4 w-48 h-48 md:w-96 md:h-96 bg-purple-500/6 rounded-full blur-3xl animate-pulse delay-1000 decor-hide"></div>
       </div>
 
       {/* Mobile Chat Header - Show when user is selected */}
@@ -60,7 +60,7 @@ const HomePage = () => {
           <div className="flex items-center gap-3 min-w-0 flex-1">
             <button
               onClick={handleBackToContacts}
-              className="p-2 text-white/80 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg hover:bg-white/20 transition-all duration-200 flex-shrink-0"
+              className="p-2 text-white/80 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg hover:bg-white/20 transition-all duration-200 flex-shrink-0 touch-target"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
@@ -98,7 +98,7 @@ const HomePage = () => {
             </div>
           </div>
           
-          <button className="p-2 text-white/80 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg hover:bg-white/20 transition-all duration-200 flex-shrink-0">
+          <button className="p-2 text-white/80 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg hover:bg-white/20 transition-all duration-200 flex-shrink-0 touch-target">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
             </svg>
@@ -115,10 +115,10 @@ const HomePage = () => {
 
         {/* Mobile Sidebar */}
         <div className={`
-          lg:hidden fixed inset-y-0 left-0 z-40 w-72 transform transition-transform duration-300 ease-in-out
+          lg:hidden fixed inset-0 z-40 w-72 max-w-full transform transition-transform duration-300 ease-in-out
           ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
         `}>
-          <div className="h-full pt-16">
+          <div className="h-full pt-16 bg-gradient-to-b from-slate-900/95 to-slate-800/95">
             <Sidebar onUserSelect={handleUserSelect} />
           </div>
         </div>
@@ -147,7 +147,7 @@ const HomePage = () => {
       {!selectedUser && isMobile && (
         <button
           onClick={toggleSidebar}
-          className="lg:hidden fixed bottom-6 right-6 z-30 w-14 h-14 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full shadow-xl flex items-center justify-center text-white hover:scale-110 transition-all duration-200"
+          className="lg:hidden fixed bottom-6 right-6 z-30 w-14 h-14 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full shadow-xl flex items-center justify-center text-white hover:scale-110 transition-all duration-200 touch-target"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -159,15 +159,13 @@ const HomePage = () => {
       {selectedUser && isMobile && (
         <button
           onClick={handleBackToContacts}
-          className="lg:hidden fixed top-4 left-4 z-40 w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full shadow-xl flex items-center justify-center text-white hover:scale-110 transition-all duration-200"
+          className="lg:hidden fixed top-4 left-4 z-40 w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full shadow-xl flex items-center justify-center text-white hover:scale-110 transition-all duration-200 touch-target"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
           </svg>
         </button>
       )}
-
-      
     </div>
   );
 };
