@@ -14,7 +14,7 @@ const NoChatSelected = () => {
       <div className="relative backdrop-blur-xl bg-white/5 rounded-3xl border border-white/10 shadow-2xl p-8 lg:p-12 max-w-lg w-full">
         
         {/* Icon Display */}
-        <div className="flex justify-center gap-4 mb-8">
+        <div className="flex justify-center pt-5 sm:pt-10 gap-4 mb-8">
           <div className="relative group">
             {/* Animated glow effect */}
             <div className="absolute -inset-2 bg-gradient-to-r from-blue-400 via-purple-500 to-cyan-400 rounded-2xl blur-lg opacity-30 group-hover:opacity-50 animate-pulse"></div>

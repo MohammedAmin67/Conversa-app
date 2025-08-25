@@ -171,7 +171,7 @@ const Navbar = () => {
                   className="group flex items-center gap-2 sm:gap-3 px-2 sm:px-3 md:px-4 py-2 sm:py-2.5 bg-gradient-to-r from-white/12 to-white/8 backdrop-blur-md border border-white/20 rounded-xl hover:from-white/16 hover:to-white/12 hover:border-white/30 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl"
                 >
                   <div className="relative flex-shrink-0">
-                    <div className="w-8 h-8 sm:w-9 sm:h-9 bg-gradient-to-br from-blue-400 via-blue-500 to-purple-500 rounded-full flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-300 ring-2 ring-white/20 group-hover:ring-white/30">
+                    <div className="w-8 h-8 sm:w-9 sm:h-3 bg-gradient-to-br from-blue-400 via-blue-500 to-purple-500 rounded-full flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-300 ring-2 ring-white/20 group-hover:ring-white/30">
                       {authUser.profilePic ? (
                         <img 
                           src={authUser.profilePic} 

@@ -56,11 +56,11 @@ const HomePage = () => {
 
       {/* Mobile Chat Header - Show when user is selected */}
       {selectedUser && isMobile && (
-        <div className="lg:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-3 pt-16 backdrop-blur-md bg-slate-900/95 border-b border-white/10">
+        <div className="lg:hidden fixed left-0 right-0 z-50 flex items-center justify-between px-3 py-5 pt-5 backdrop-blur-md bg-slate-900/95 border-b border-white/10">
           <div className="flex items-center gap-3 min-w-0 flex-1">
             <button
               onClick={handleBackToContacts}
-              className="p-2 text-white/80 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg hover:bg-white/20 transition-all duration-200 flex-shrink-0 touch-target"
+              className="p-2.5 flex justify-center text-white/80 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg hover:bg-white/20 transition-all duration-200 flex-shrink-0 touch-target"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
@@ -97,8 +97,8 @@ const HomePage = () => {
               </div>
             </div>
           </div>
-          
-          <button className="p-2 text-white/80 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg hover:bg-white/20 transition-all duration-200 flex-shrink-0 touch-target">
+
+          <button className="p-2.5 flex justify-center text-white/80 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg hover:bg-white/20 transition-all duration-200 flex-shrink-0 touch-target">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
             </svg>
@@ -107,7 +107,7 @@ const HomePage = () => {
       )}
 
       {/* Main Container */}
-      <div className="flex h-full pt-16">
+      <div className="flex h-full pt-1">
         {/* Desktop Sidebar */}
         <div className="hidden lg:block">
           <Sidebar onUserSelect={handleUserSelect} />
@@ -115,7 +115,7 @@ const HomePage = () => {
 
         {/* Mobile Sidebar */}
         <div className={`
-          lg:hidden fixed inset-0 z-40 w-72 max-w-full transform transition-transform duration-300 ease-in-out
+          lg:hidden fixed inset-0 z-40 w-32 max-w-full transform transition-transform duration-300 ease-in-out
           ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
         `}>
           <div className="h-full pt-16 bg-gradient-to-b from-slate-900/95 to-slate-800/95">

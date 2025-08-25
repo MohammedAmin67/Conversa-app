@@ -41,7 +41,7 @@ const Sidebar = ({ onUserSelect }) => {
       <div className="relative flex-shrink-0 border-b border-white/10">
         <div className="p-5 lg:p-6">
           {/* Title - Fixed spacing */}
-          <div className="flex items-center gap-4 mb-6">
+          <div className="flex items-center gap-4 mb-6 sm:mb-3">
             <div className="relative group mx-auto lg:mx-0">
               <div className="p-3 lg:p-4 bg-gradient-to-br from-blue-500/30 via-purple-500/25 to-cyan-500/30 rounded-2xl lg:rounded-3xl backdrop-blur-sm border border-white/30 shadow-xl flex-shrink-0">
                 <Users className="w-6 h-6 lg:w-7 lg:h-7 text-white" />
