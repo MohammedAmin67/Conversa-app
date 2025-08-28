@@ -38,7 +38,7 @@ const Sidebar = ({ onUserSelect }) => {
       </div>
 
       {/* Header */}
-      <div className="relative flex-shrink-0 border-b border-white/10">
+      <div className="relative flex-shrink-0 border-b border-white/10 pt-16">
         <div className="p-5 lg:p-6">
           {/* Title - Fixed spacing */}
           <div className="flex items-center gap-4 mb-6 sm:mb-3">
@@ -110,7 +110,7 @@ const Sidebar = ({ onUserSelect }) => {
       </div>
 
       {/* Contacts List - Clean mobile design */}
-      <div className="flex-1 overflow-y-auto py-3 min-h-0">
+      <div className="flex-1 overflow-y-auto py-3 min-h-0 pt-16 lg:pt-0">
         {filteredUsers.map((user) => (
           <button
             key={user._id}

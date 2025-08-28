@@ -1,13 +1,17 @@
 import { useChatStore } from "../store/useChatStore";
 import { useSettingsStore } from "../store/useSettingsStore";
 import { useTranslation } from "../lib/i18n";
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback, useState } from "react";
 
 import ChatHeader from "./ChatHeader";
 import MessageInput from "./MessageInput";
 import MessageSkeleton from "./skeletons/MessageSkeleton";
 import { useAuthStore } from "../store/useAuthStore";
 import { formatMessageTime } from "../lib/utils";
+import Modal from "react-modal";
+
+// Set the app element for accessibility (should match your root div id)
+Modal.setAppElement('#root');
 
 const ChatContainer = () => {
   const { messages, getMessages, isMessagesLoading, selectedUser, subscribeToMessages, unsubscribeFromMessages } = useChatStore();
@@ -15,6 +19,20 @@ const ChatContainer = () => {
   const { settings } = useSettingsStore();
   const { t } = useTranslation();
   const messageEndRef = useRef(null);
+
+  // Modal state for expanded image
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalImg, setModalImg] = useState(null);
+
+  const openImageModal = (imgUrl) => {
+    setModalImg(imgUrl);
+    setModalOpen(true);
+  };
+
+  const closeImageModal = () => {
+    setModalOpen(false);
+    setModalImg(null);
+  };
 
   const scrollToBottom = useCallback(() => {
     if (messageEndRef.current) {
@@ -60,6 +78,36 @@ const ChatContainer = () => {
         <ChatHeader />
       </div>
 
+      {/* Modal for expanded image */}
+      <Modal
+        isOpen={modalOpen}
+        onRequestClose={closeImageModal}
+        contentLabel="Expanded Image"
+        className="flex justify-center items-center fixed inset-0 bg-black/80 z-50 outline-none"
+        overlayClassName="fixed inset-0 bg-black/80 z-40"
+        style={{
+          content: {
+            background: "none",
+            border: "none",
+            padding: 0,
+            inset: 0,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          },
+          overlay: {},
+        }}
+      >
+        {modalImg && (
+          <img
+            src={modalImg}
+            alt="Expanded"
+            className="max-w-full max-h-[90vh] rounded-xl shadow-lg border-2 border-white/20 cursor-zoom-out"
+            onClick={closeImageModal}
+          />
+        )}
+      </Modal>
+
       {/* Messages */}
       <div className="flex-1 min-h-0 relative">
         <div className={`h-full overflow-y-auto ${containerPadding} ${messageSpacing} relative z-10`}>
@@ -103,13 +151,14 @@ const ChatContainer = () => {
                         <img
                           src={message.image}
                           alt="Attachment"
-                          className={`${settings?.compactMode ? 'max-w-[180px] sm:max-w-[220px] lg:max-w-[260px]' : 'max-w-[200px] sm:max-w-[240px] lg:max-w-[280px]'} w-full rounded-lg lg:rounded-xl border border-white/20 shadow-lg`}
+                          className={`${settings?.compactMode ? 'max-w-[180px] sm:max-w-[220px] lg:max-w-[260px]' : 'max-w-[200px] sm:max-w-[240px] lg:max-w-[280px]'} w-full rounded-lg lg:rounded-xl border border-white/20 shadow-lg cursor-pointer`}
                           onLoad={() => {
                             setTimeout(scrollToBottom, 100);
                           }}
                           onError={(e) => {
                             console.error("Failed to load image:", e);
                           }}
+                          onClick={() => openImageModal(message.image)}
                         />
                       </div>
                     )}
