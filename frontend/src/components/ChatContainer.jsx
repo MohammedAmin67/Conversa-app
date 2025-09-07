@@ -41,10 +41,12 @@ const ChatContainer = () => {
   }, []);
 
   useEffect(() => {
-    getMessages(selectedUser._id);
-    subscribeToMessages();
-    return () => unsubscribeFromMessages();
-  }, [selectedUser._id, getMessages, subscribeToMessages, unsubscribeFromMessages]);
+    if (selectedUser?._id) {
+      getMessages(selectedUser._id);
+      subscribeToMessages();
+      return () => unsubscribeFromMessages();
+    }
+  }, [selectedUser?._id, getMessages, subscribeToMessages, unsubscribeFromMessages]);
 
   useEffect(() => {
     if (messages) {
@@ -52,9 +54,18 @@ const ChatContainer = () => {
     }
   }, [messages, scrollToBottom]);
 
+  // If no user is selected, show a placeholder or nothing
+  if (!selectedUser) {
+    return (
+      <div className="h-full flex flex-col items-center justify-center bg-gradient-to-br from-slate-900 via-blue-900/50 to-slate-800 relative pt-16">
+        <span className="text-white/60 text-lg">Select a conversation to start chatting</span>
+      </div>
+    );
+  }
+
   if (isMessagesLoading) {
     return (
-      <div className="h-full flex flex-col bg-gradient-to-br from-slate-900 via-blue-900/50 to-slate-800 relative">
+      <div className="h-full flex flex-col bg-gradient-to-br from-slate-900 via-blue-900/50 to-slate-800 relative pt-16">
         <ChatHeader />
         <MessageSkeleton />
         <MessageInput />
@@ -70,8 +81,8 @@ const ChatContainer = () => {
   const messageMaxWidth = settings?.compactMode ? 'max-w-[240px] sm:max-w-[280px] lg:max-w-lg' : 'max-w-[260px] sm:max-w-[320px] lg:max-w-md';
 
   return (
-    <div className={`h-full flex flex-col bg-gradient-to-br from-slate-900 via-blue-900/50 to-slate-800 relative ${settings?.compactMode ? 'compact-chat' : ''}`}>
-      {/* Chat Header - Always visible */}
+    <div className={`h-full flex flex-col bg-gradient-to-br from-slate-900 via-blue-900/50 to-slate-800 relative pt-16 ${settings?.compactMode ? 'compact-chat' : ''}`}>
+      {/* Always show ChatHeader when a user is selected */}
       <ChatHeader />
 
       {/* Modal for expanded image */}
@@ -109,7 +120,6 @@ const ChatContainer = () => {
         <div className={`h-full overflow-y-auto ${containerPadding} ${messageSpacing} relative z-10`}>
           {messages.map((message) => {
             const isOwnMessage = message.senderId === authUser._id;
-            
             return (
               <div
                 key={message._id}
@@ -138,7 +148,6 @@ const ChatContainer = () => {
                   <div className={`${settings?.compactMode ? 'text-xs' : 'text-xs'} text-white/50 mb-1 ${isOwnMessage ? "text-right" : "text-left"}`}>
                     {formatMessageTime(message.createdAt)}
                   </div>
-
                   {/* Message Content */}
                   <div
                     className={`backdrop-blur-xl border shadow-xl ${settings?.compactMode ? 'rounded-lg lg:rounded-xl' : 'rounded-xl lg:rounded-2xl'} ${messagePadding} ${
@@ -173,7 +182,6 @@ const ChatContainer = () => {
                     )}
                   </div>
                 </div>
-
                 {/* Own Avatar */}
                 {isOwnMessage && (
                   <div className={`${avatarSize} rounded-full border border-blue-400/30 shadow-lg overflow-hidden flex-shrink-0 order-2`}>
@@ -193,9 +201,7 @@ const ChatContainer = () => {
               </div>
             );
           })}
-
           <div ref={messageEndRef} />
-
           {/* Empty state */}
           {messages.length === 0 && (
             <div className="h-full flex items-center justify-center p-4">
@@ -214,7 +220,6 @@ const ChatContainer = () => {
           )}
         </div>
       </div>
-
       <MessageInput />
     </div>
   );

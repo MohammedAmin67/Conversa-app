@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from "react";
-import { X, ArrowLeft, MoreVertical, User } from "lucide-react";
+import { ArrowLeft, User } from "lucide-react";
 import { useAuthStore } from "../store/useAuthStore";
 import { useChatStore } from "../store/useChatStore";
 
-// Simple dropdown for 3-dots menu
+// Simple dropdown for 3-dots menu (not needed on desktop now)
 const ChatOptionsMenu = ({ onClose }) => (
   <div className="absolute right-0 top-12 z-50 w-40 bg-slate-900 border border-white/10 rounded-xl shadow-xl py-2 animate-fade-in">
     <button
@@ -108,8 +108,10 @@ const ChatHeader = () => {
             </p>
           </div>
         </div>
-        {/* Options/More (3-dots) button */}
-        <div className="relative" ref={menuRef}>
+        {/* Options/More (3-dots) button removed on desktop */}
+        <div className="relative block sm:hidden" ref={menuRef}>
+          {/* Only render 3-dots menu on mobile */}
+          {/* 
           <button
             className="group p-2 sm:p-2.5 rounded-lg sm:rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all duration-300 shadow-lg backdrop-blur-sm flex-shrink-0 min-w-[40px] min-h-[40px]"
             aria-label="More options"
@@ -117,6 +119,7 @@ const ChatHeader = () => {
           >
             <MoreVertical className="w-5 h-5 text-white/70 group-hover:text-white transition-colors duration-300" />
           </button>
+          */}
           {showMenu && (
             <ChatOptionsMenu onClose={() => setShowMenu(false)} />
           )}
