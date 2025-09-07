@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useChatStore } from "../store/useChatStore";
 import { useAuthStore } from "../store/useAuthStore";
+import { User } from "lucide-react";
 
 import Sidebar from "../components/Sidebar";
 import NoChatSelected from "../components/NoChatSelected";
@@ -69,13 +70,17 @@ const HomePage = () => {
             
             <div className="flex items-center gap-3 min-w-0 flex-1">
               <div className="relative flex-shrink-0">
-                <div className="w-8 h-8 rounded-full overflow-hidden border border-white/30 shadow-lg">
-                  <img
-                    src={selectedUser.profilePic || "/avatar.png"}
-                    alt={selectedUser.fullName}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+                <div className="w-8 h-8 rounded-full overflow-hidden border border-white/30 shadow-lg bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center">
+                  {selectedUser.profilePic ? (
+                    <img
+                      src={selectedUser.profilePic}
+                      alt={selectedUser.fullName}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <User className="w-5 h-5 text-white/60" />
+                  )}
+               </div>
                 
                 {/* Online indicator */}
                 {onlineUsers.includes(selectedUser._id) && (

@@ -2,6 +2,7 @@ import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useAuthStore } from "../store/useAuthStore";
 import { useTranslation } from "../lib/i18n";
 import useScreenSize from "../hooks/useScreenSize";
+import { User } from "lucide-react"; 
 
 const Navbar = () => {
   const { logout, authUser } = useAuthStore();
@@ -10,6 +11,7 @@ const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const params = useParams();
+
 
   // Check if we're in a chat route
   const isChatRoute = location.pathname.startsWith('/chat/');
@@ -67,10 +69,8 @@ const Navbar = () => {
               <div className="flex items-center gap-3 flex-1 min-w-0">
                 <div className="relative flex-shrink-0">
                   <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center shadow-lg">
-                    <span className="text-white font-semibold text-sm">
-                      {chatUser.fullName?.charAt(0)?.toUpperCase()}
-                    </span>
-                  </div>
+                      <User className="w-2/3 h-2/3 text-white/60" />
+                </div>
                   {chatUser.isOnline && (
                     <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-400 rounded-full border-2 border-slate-900"></div>
                   )}
@@ -173,15 +173,15 @@ const Navbar = () => {
                   <div className="relative flex-shrink-0">
                     <div className="w-8 h-8 sm:w-9 sm:h-3 bg-gradient-to-br from-blue-400 via-blue-500 to-purple-500 rounded-full flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-300 ring-2 ring-white/20 group-hover:ring-white/30">
                       {authUser.profilePic ? (
-                        <img 
-                          src={authUser.profilePic} 
+                        <img
+                          src={authUser.profilePic}
                           alt={authUser.fullName}
                           className="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover"
                         />
                       ) : (
-                        <span className="text-white text-xs sm:text-sm font-bold tracking-wide">
-                          {authUser.fullName?.charAt(0)?.toUpperCase()}
-                        </span>
+                        <div className="w-full h-full flex items-center justify-center">
+                          <User className="w-2/3 h-2/3 text-white/60" />
+                        </div>
                       )}
                     </div>
                     <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 sm:w-3 sm:h-3 bg-green-400 rounded-full border-2 border-slate-900 shadow-sm"></div>

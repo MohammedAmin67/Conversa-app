@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useAuthStore } from "../store/useAuthStore";
 import { useTranslation } from "../lib/i18n";
 import { Camera, Mail, User, Calendar, Shield, Loader } from "lucide-react";
@@ -11,14 +11,22 @@ const ProfilePage = () => {
   // Force refresh user data when component mounts
   useEffect(() => {
     checkAuth();
-  }, []);
+  }, [checkAuth]);
+
+  // Helper function to check if profile picture exists - IMPROVED
+  const hasProfilePicture = useCallback(() => {
+    const currentProfilePic = authUser?.profilePic || selectedImg;
+    return currentProfilePic && 
+           currentProfilePic !== "/avatar.png" && 
+           currentProfilePic.trim() !== "";
+  }, [authUser?.profilePic, selectedImg]);
 
   // Reset selectedImg when authUser changes (after successful update)
   useEffect(() => {
     if (authUser?.profilePic && authUser.profilePic !== "/avatar.png") {
-      setSelectedImg(null); // Clear local state since authUser has the updated image
+      setSelectedImg(null);
     }
-  }, [authUser?.profilePic]);
+  }, [authUser?.profilePic, hasProfilePicture]);
 
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
@@ -29,7 +37,7 @@ const ProfilePage = () => {
 
     reader.onload = async () => {
       const base64Image = reader.result;
-      setSelectedImg(base64Image); // Show image immediately
+      setSelectedImg(base64Image); // Shows image immediately
       
       try {
         await updateProfile({ profilePic: base64Image });
@@ -42,11 +50,11 @@ const ProfilePage = () => {
     };
   };
 
-  // Calculate profile completion - IMPROVED
+  // Calculate profile completion
   const getProfileCompletion = () => {
     let completion = 0;
     
-    // Get current profile pic (prioritize authUser over selectedImg)
+    // Get current profile pic
     const currentProfilePic = authUser?.profilePic || selectedImg;
     
     // Basic required fields (75% total)
@@ -64,14 +72,6 @@ const ProfilePage = () => {
     return completion;
   };
 
-  // Helper function to check if profile picture exists - IMPROVED
-  const hasProfilePicture = () => {
-    const currentProfilePic = authUser?.profilePic || selectedImg;
-    return currentProfilePic && 
-           currentProfilePic !== "/avatar.png" && 
-           currentProfilePic.trim() !== "";
-  };
-
   // Get the current profile image to display - IMPROVED
   const getCurrentProfileImage = () => {
     // Prioritize selectedImg (for immediate feedback) then authUser.profilePic
@@ -87,7 +87,7 @@ const ProfilePage = () => {
     console.log("selectedImg:", selectedImg);
     console.log("hasProfilePicture():", hasProfilePicture());
     console.log("profileCompletion:", profileCompletion);
-  }, [authUser?.profilePic, selectedImg, profileCompletion]);
+  }, [authUser?.profilePic, selectedImg, profileCompletion, hasProfilePicture]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 pt-20 pb-8">

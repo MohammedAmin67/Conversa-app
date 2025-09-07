@@ -517,19 +517,17 @@ const SettingsPage = () => {
               {/* User Info */}
               <div className="mt-8 p-4 bg-white/5 rounded-xl border border-white/10">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center flex-shrink-0">
-                    {authUser?.profilePic && authUser.profilePic !== "/avatar.png" ? (
-                      <img
-                        src={authUser.profilePic}
-                        alt="Profile"
-                        className="w-full h-full object-cover rounded-full"
-                      />
-                    ) : (
-                      <span className="text-white font-bold text-lg">
-                        {authUser?.fullName?.charAt(0)?.toUpperCase()}
-                      </span>
-                    )}
-                  </div>
+                 <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center flex-shrink-0">
+                  {authUser?.profilePic && authUser.profilePic !== "/avatar.png" ? (
+                    <img
+                      src={authUser.profilePic}
+                      alt="Profile"
+                      className="w-full h-full object-cover rounded-full"
+                    />
+                  ) : (
+                    <User className="w-7 h-7 text-white/60" />
+                  )}
+                </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-white font-medium truncate">
                       {authUser?.fullName}
@@ -566,9 +564,7 @@ const SettingsPage = () => {
                       className="w-full h-full object-cover rounded-full"
                     />
                   ) : (
-                    <span className="text-white font-bold text-sm sm:text-lg">
-                      {authUser?.fullName?.charAt(0)?.toUpperCase()}
-                    </span>
+                    <User className="w-6 h-6 text-white/60" />
                   )}
                 </div>
                 <div className="flex-1 min-w-0">

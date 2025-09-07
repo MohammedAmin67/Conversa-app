@@ -122,11 +122,17 @@ const ChatContainer = () => {
                 {/* Avatar */}
                 {!isOwnMessage && (
                   <div className={`${avatarSize} rounded-full border border-white/20 shadow-lg overflow-hidden flex-shrink-0`}>
-                    <img
-                      src={selectedUser.profilePic || "/avatar.png"}
-                      alt="Profile"
-                      className="w-full h-full object-cover"
-                    />
+                    {selectedUser.profilePic ? (
+                      <img
+                        src={selectedUser.profilePic}
+                        alt="Profile"
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-500/20 to-purple-500/20">
+                        <User className="w-2/3 h-2/3 text-white/60" />
+                      </div>
+                    )}
                   </div>
                 )}
 
@@ -175,11 +181,17 @@ const ChatContainer = () => {
                 {/* Own Avatar */}
                 {isOwnMessage && (
                   <div className={`${avatarSize} rounded-full border border-blue-400/30 shadow-lg overflow-hidden flex-shrink-0 order-2`}>
-                    <img
-                      src={authUser.profilePic || "/avatar.png"}
-                      alt="Your Profile"
-                      className="w-full h-full object-cover"
-                    />
+                    {authUser.profilePic ? (
+                      <img
+                        src={authUser.profilePic}
+                        alt="Your Profile"
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-500/20 to-purple-500/20">
+                        <User className="w-2/3 h-2/3 text-white/60" />
+                      </div>
+                    )}
                   </div>
                 )}
               </div>

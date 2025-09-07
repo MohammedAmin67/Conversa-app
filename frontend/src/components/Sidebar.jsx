@@ -126,11 +126,17 @@ const Sidebar = ({ onUserSelect }) => {
           >
             {/* Avatar - Centered on mobile, left-aligned on desktop */}
             <div className="relative mx-auto lg:mx-0">
+             {user.profilePic ? (
               <img
-                src={user.profilePic || "/avatar.png"}
+                src={user.profilePic}
                 alt={user.fullName}
                 className="w-12 h-12 object-cover rounded-full"
               />
+            ) : (
+              <div className="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-full">
+                <User className="w-7 h-7 text-white/60" />
+              </div>
+            )}
               
               {/* Online indicator */}
               {onlineUsers.includes(user._id) && (

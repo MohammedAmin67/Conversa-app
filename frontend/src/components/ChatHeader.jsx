@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { X, ArrowLeft, MoreVertical } from "lucide-react";
+import { X, ArrowLeft, MoreVertical, User } from "lucide-react";
 import { useAuthStore } from "../store/useAuthStore";
 import { useChatStore } from "../store/useChatStore";
 
@@ -70,12 +70,16 @@ const ChatHeader = () => {
           </button>
           {/* Avatar with online indicator */}
           <div className="relative flex-shrink-0">
-            <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full overflow-hidden ring-2 ring-white/20 shadow-xl">
-              <img 
-                src={selectedUser.profilePic || "/avatar.png"} 
-                alt={selectedUser.fullName}
-                className="w-full h-full object-cover"
-              />
+            <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full overflow-hidden ring-2 ring-white/20 shadow-xl bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center">
+              {selectedUser.profilePic ? (
+                <img 
+                  src={selectedUser.profilePic}
+                  alt={selectedUser.fullName}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <User className="w-2/3 h-2/3 text-white/60" />
+              )}
             </div>
             {/* Online status indicator */}
             <div className={`absolute -bottom-0.5 -right-0.5 w-3 h-3 sm:w-4 sm:h-4 rounded-full border-2 border-slate-800 shadow-lg transition-all duration-300 ${
