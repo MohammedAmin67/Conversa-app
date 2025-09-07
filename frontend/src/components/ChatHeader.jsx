@@ -50,6 +50,8 @@ const ChatHeader = () => {
     }
   }, [showMenu]);
 
+  if (!selectedUser) return null;
+
   return (
     <div className="
       px-2 sm:px-4 py-2 sm:py-3 border-b border-white/10 

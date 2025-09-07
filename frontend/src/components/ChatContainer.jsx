@@ -55,9 +55,7 @@ const ChatContainer = () => {
   if (isMessagesLoading) {
     return (
       <div className="h-full flex flex-col bg-gradient-to-br from-slate-900 via-blue-900/50 to-slate-800 relative">
-        <div className="hidden lg:block">
-          <ChatHeader />
-        </div>
+        <ChatHeader />
         <MessageSkeleton />
         <MessageInput />
       </div>
@@ -73,10 +71,8 @@ const ChatContainer = () => {
 
   return (
     <div className={`h-full flex flex-col bg-gradient-to-br from-slate-900 via-blue-900/50 to-slate-800 relative ${settings?.compactMode ? 'compact-chat' : ''}`}>
-      {/* Desktop Header Only */}
-      <div className="hidden lg:block">
-        <ChatHeader />
-      </div>
+      {/* Chat Header - Always visible */}
+      <ChatHeader />
 
       {/* Modal for expanded image */}
       <Modal
