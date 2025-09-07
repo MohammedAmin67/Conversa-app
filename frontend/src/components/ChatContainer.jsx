@@ -83,7 +83,9 @@ const ChatContainer = () => {
   return (
     <div className={`h-full flex flex-col bg-gradient-to-br from-slate-900 via-blue-900/50 to-slate-800 relative pt-16 ${settings?.compactMode ? 'compact-chat' : ''}`}>
       {/* Always show ChatHeader when a user is selected */}
-      <ChatHeader />
+      <div className="hidden sm:block">
+        <ChatHeader />
+      </div>
 
       {/* Modal for expanded image */}
       <Modal
