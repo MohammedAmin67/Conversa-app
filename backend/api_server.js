@@ -6,27 +6,33 @@ import messageRoutes from "./src/routes/message.route.js";
 import { connectDB } from "./src/lib/db.js";
 import cors from "cors";
 import path from "path";
+import morgan from "morgan";
 import { app, server } from "./src/lib/socket.js";
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5001;
 const __dirname = path.resolve();
 
-// Allow both deployed frontend and localhost for CORS
 const allowedOrigins = [
-  process.env.CLIENT_URL,           
+  process.env.CLIENT_URL,
   "http://localhost:5173"
-].filter(Boolean);                 
+].filter(Boolean);
 
-app.use(express.json({ limit: '5mb' }));
-app.use(express.urlencoded({ limit: '5mb', extended: true }));
+// Morgan request logger 
+app.use(morgan("combined"));
+
+app.use(express.json({ limit: "5mb" }));
+app.use(express.urlencoded({ limit: "5mb", extended: true }));
 
 app.use(cookieParser());
+
+// CORS Middleware
 app.use(
   cors({
-    origin: function(origin, callback) {
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps, curl, Postman)
       if (!origin) return callback(null, true);
       if (allowedOrigins.includes(origin)) return callback(null, true);
-      return callback(new Error('Not allowed by CORS'));
+      return callback(new Error("Not allowed by CORS"));
     },
     credentials: true,
   })
